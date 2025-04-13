@@ -1,4 +1,5 @@
 import { Article } from '../types/news';
+import bookmarkImg from '../assets/bookmark.svg';
 
 interface Props {
     article: Article;
@@ -6,8 +7,12 @@ interface Props {
     isFavorite?: boolean;
 }
 
-const NewsCard: React.FC<Props> = ({ article, onSave, isFavorite = false }) => (
-    <div className='rounded-xl shadow-md p-4 bg-white dark:bg-gray-800 transition flex flex-col'>
+const NewsCard: React.FC<Props> = ({
+    article,
+    onSave = () => {},
+    isFavorite = false,
+}) => (
+    <div className='relative rounded-xl shadow-md p-4 bg-white dark:bg-gray-800 transition flex flex-col'>
         {article.urlToImage && (
             <img
                 src={article.urlToImage}
@@ -34,6 +39,17 @@ const NewsCard: React.FC<Props> = ({ article, onSave, isFavorite = false }) => (
                 >
                     {isFavorite ? 'Remove from favorites' : 'Add to Favorites'}
                 </button>
+            )}
+        </div>
+        <div className='absolute right-4 -top-1'>
+            {isFavorite && (
+                <img
+                    src={bookmarkImg}
+                    alt={''}
+                    width={60}
+                    height={60}
+                    className=''
+                />
             )}
         </div>
     </div>

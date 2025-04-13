@@ -13,9 +13,11 @@ const categories = [
 const Navbar = () => {
     return (
         <nav className='bg-white dark:bg-gray-800 shadow p-4 flex justify-between items-center'>
-            <div className='bg-blue-500 text-white px-2 py-1 font-semibold'>
-                News
+            <div className='flex border-blue-500 border-2 font-semibold'>
+                <div className='bg-blue-500 text-white px-2 py-1'>Musk</div>
+                <div className='text-blue-500 bg-white px-2 py-1'>News</div>
             </div>
+
             <div className='flex gap-4 overflow-auto'>
                 {categories.map((cat) => (
                     <NavLink
