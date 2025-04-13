@@ -10,7 +10,7 @@ function App() {
             <Routes>
                 <Route
                     path='/'
-                    element={<Navigate to='/category/general' replace />}
+                    element={<Navigate to='/category/all' replace />}
                 />
                 <Route path='/category/:category' element={<Category />} />
                 <Route path='/favorites' element={<Favorites />} />

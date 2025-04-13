@@ -35,7 +35,9 @@ const NewsCard: React.FC<Props> = ({
             {onSave && (
                 <button
                     onClick={() => onSave(article)}
-                    className='cursor-pointer text-yellow-500'
+                    className={`cursor-pointer ${
+                        isFavorite ? 'text-red-600' : 'text-blue-500'
+                    } `}
                 >
                     {isFavorite ? 'Remove from favorites' : 'Add to Favorites'}
                 </button>
@@ -48,7 +50,7 @@ const NewsCard: React.FC<Props> = ({
                     alt={''}
                     width={60}
                     height={60}
-                    className=''
+                    className='drop-shadow-sm'
                 />
             )}
         </div>

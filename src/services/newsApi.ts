@@ -12,11 +12,10 @@ export const getTopHeadlines = async (
 ): Promise<Article[]> => {
     const params = {
         apiKey: API_KEY,
-        category,
+        category: category === 'all' ? '' : category,
         q,
         from,
         sources: source,
-        country: 'us',
     };
 
     const { data } = await axios.get(`${BASE_URL}/top-headlines`, { params });

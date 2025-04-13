@@ -15,8 +15,6 @@ const Favorites = () => {
         setFavorites(getFavorites());
     };
 
-    console.log(favorites);
-
     return (
         <div className='p-4 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
             {favorites.length > 0 ? (

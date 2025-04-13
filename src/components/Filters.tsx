@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 interface Props {
     onFilter: (query: string, date: string, source: string) => void;
@@ -12,6 +13,8 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
     const [sourcesList, setSourcesList] = useState<
         { id: string; name: string }[]
     >([]);
+
+    const { category } = useParams();
 
     useEffect(() => {
         const fetchSources = async () => {
@@ -26,7 +29,7 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
                 );
                 setSourcesList(data.sources);
             } catch (error) {
-                console.error('Ошибка при загрузке источников:', error);
+                console.error('Error loading sources:', error);
             }
         };
         fetchSources();
@@ -36,13 +39,19 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
         onFilter(query, date, source);
     };
 
-    console.log(sourcesList);
+    const handleReset = () => {
+        setQuery('');
+        setDate('');
+        setSource('');
+        setSourcesList([]);
+        onFilter(query, date, source);
+    };
 
     return (
-        <div className='p-4 flex flex-col sm:flex-row gap-4 items-center'>
+        <div className='p-4 flex flex-wrap sm:flex-row gap-4 items-center justify-center'>
             <input
                 type='text'
-                placeholder='Ключевое слово'
+                placeholder='Keyword'
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className='p-2 rounded border'
@@ -53,23 +62,33 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
                 onChange={(e) => setDate(e.target.value)}
                 className='p-2 rounded border'
             />
-            <select
-                value={source}
-                onChange={(e) => setSource(e.target.value)}
-                className='p-2 rounded border'
-            >
-                <option value=''>Все источники</option>
-                {sourcesList.map((s) => (
-                    <option key={s.id} value={s.id}>
-                        {s.name}
-                    </option>
-                ))}
-            </select>
+
+            {category === 'all' && (
+                <select
+                    value={source}
+                    onChange={(e) => setSource(e.target.value)}
+                    className='p-2 rounded border'
+                >
+                    <option value=''>All sources</option>
+                    {sourcesList.map((s) => (
+                        <option key={s.id} value={s.id}>
+                            {s.name}
+                        </option>
+                    ))}
+                </select>
+            )}
+
             <button
                 onClick={handleApply}
-                className='bg-blue-500 text-white p-2 rounded'
+                className='bg-blue-500 text-white p-2 rounded cursor-pointer'
             >
-                Применить фильтры
+                Apply <span className='hidden md:inline'>filter</span>
+            </button>
+            <button
+                onClick={handleReset}
+                className='bg-red-800 text-white p-2 rounded cursor-pointer'
+            >
+                Reset
             </button>
         </div>
     );
