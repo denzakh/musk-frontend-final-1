@@ -99,9 +99,11 @@ const FiltersPage = () => {
                     onChange={(e) => setSource(e.target.value)}
                     className='p-2 rounded border'
                 >
-                    <option value=''>All sources</option>
+                    <option value='' className='text-black'>
+                        All sources
+                    </option>
                     {sourcesList.map((s) => (
-                        <option key={s.id} value={s.id}>
+                        <option key={s.id} value={s.id} className='text-black'>
                             {s.name}
                         </option>
                     ))}
