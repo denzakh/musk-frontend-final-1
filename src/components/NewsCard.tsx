@@ -30,7 +30,7 @@ const NewsCard: React.FC<Props> = ({
             style={{ marginTop: 'auto' }}
         >
             <a href={article.url} target='_blank' className='text-blue-500'>
-                Читать
+                Read the article
             </a>
             {onSave && (
                 <button

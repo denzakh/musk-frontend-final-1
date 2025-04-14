@@ -14,6 +14,8 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
         { id: string; name: string }[]
     >([]);
 
+    console.log(source);
+
     const { category } = useParams();
 
     useEffect(() => {
@@ -32,7 +34,7 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
                 console.error('Error loading sources:', error);
             }
         };
-        fetchSources();
+        // fetchSources();
     }, []);
 
     const handleApply = () => {

@@ -1,6 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 import favoriteImg from '../assets/favorite.svg';
 import burgerImg from '../assets/burger.svg';
+import searchImg from '../assets/search.svg';
 import { useState } from 'react';
 
 const categories = [
@@ -42,7 +43,26 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <div className='ml-[auto] md:ml-0'>
+            <div className='ml-[auto] md:ml-0 flex items-center gap-5'>
+                <NavLink
+                    to='/filters'
+                    className={({ isActive }) =>
+                        isActive
+                            ? 'text-blue-500 font-semibold'
+                            : 'text-gray-600 dark:text-gray-300'
+                    }
+                >
+                    <div className='flex items-center gap-2'>
+                        <img
+                            src={searchImg}
+                            alt={''}
+                            width={30}
+                            height={30}
+                            className=''
+                        />
+                        <span className='hidden lg:inline'>Search</span>
+                    </div>
+                </NavLink>
                 <NavLink
                     to='/favorites'
                     className={({ isActive }) =>
@@ -59,7 +79,7 @@ const Navbar = () => {
                             height={30}
                             className=''
                         />
-                        <span className='hidden md:inline'>Favorites</span>
+                        <span className='hidden lg:inline'>Favorites</span>
                     </div>
                 </NavLink>
             </div>

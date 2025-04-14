@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Category from './pages/Category';
 import Favorites from './pages/Favorites';
 import Navbar from './components/Navbar';
+import FilterPage from './pages/FilterPage';
 
 function App() {
     return (
@@ -10,10 +11,11 @@ function App() {
             <Routes>
                 <Route
                     path='/'
-                    element={<Navigate to='/category/all' replace />}
+                    element={<Navigate to='/category/general' replace />}
                 />
                 <Route path='/category/:category' element={<Category />} />
                 <Route path='/favorites' element={<Favorites />} />
+                <Route path='/filters' element={<FilterPage />} />
             </Routes>
         </div>
     );
