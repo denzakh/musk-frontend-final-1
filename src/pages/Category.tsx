@@ -11,20 +11,18 @@ const Category = () => {
     const { category } = useParams();
     const [articles, setArticles] = useState<Article[]>([]);
     const query = '';
-    const date = '';
     const source = '';
     const [loading, setLoading] = useState(false);
 
-    const fetchArticles = () => {
-        if (category) {
-            setLoading(true);
-            getTopHeadlines(category, query, date, source)
-                .then(setArticles)
-                .finally(() => setLoading(false));
-        }
-    };
-
     useEffect(() => {
+        const fetchArticles = () => {
+            if (category) {
+                setLoading(true);
+                getTopHeadlines(category, query, source)
+                    .then(setArticles)
+                    .finally(() => setLoading(false));
+            }
+        };
         fetchArticles();
     }, [category]);
 
@@ -34,8 +32,13 @@ const Category = () => {
         setFavorites(getFavorites());
     }, []);
 
-    const handleRemove = (url: string) => {
-        removeFromFavorites(url);
+    const handleRemoveFavorites = (article: Article) => {
+        removeFromFavorites(article.url);
+        setFavorites(getFavorites());
+    };
+
+    const handleSaveFavorites = (article: Article) => {
+        saveToFavorites(article);
         setFavorites(getFavorites());
     };
 
@@ -44,12 +47,12 @@ const Category = () => {
             favorites.some((item) => item.publishedAt === article.publishedAt)
         ) {
             return {
-                onSave: () => handleRemove(article.url),
+                onSave: () => handleRemoveFavorites(article),
                 isFavorite: true,
             };
         }
         return {
-            onSave: saveToFavorites,
+            onSave: () => handleSaveFavorites(article),
             isFavorite: false,
         };
     };

@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { getTopHeadlines } from '../services/newsApi';
 import { Article } from '../types/news';
 import NewsCard from '../components/NewsCard';
@@ -7,20 +5,18 @@ import { saveToFavorites } from '../utils/localStorage';
 import { getFavorites, removeFromFavorites } from '../utils/localStorage';
 import NewsCardSkeleton from '../components/NewsCardSkeleton';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const FiltersPage = () => {
     const [articles, setArticles] = useState<Article[]>([]);
-    const query = '';
-    const date = '';
-    const source = '';
+    const [query, setQuery] = useState('');
+    const [source, setSource] = useState('');
     const [loading, setLoading] = useState(false);
     const [sourcesList, setSourcesList] = useState<
         { id: string; name: string }[]
     >([]);
 
     const category = '';
-
-    console.log(source);
 
     useEffect(() => {
         const fetchSources = async () => {
@@ -38,33 +34,28 @@ const FiltersPage = () => {
                 console.error('Error loading sources:', error);
             }
         };
-        // fetchSources();
+        if (sourcesList.length === 0) {
+            fetchSources();
+        }
     }, []);
 
+    const fetchArticles = () => {
+        setLoading(true);
+        getTopHeadlines(category, query, source)
+            .then(setArticles)
+            .catch(() => setArticles([]))
+            .finally(() => setLoading(false));
+    };
+
     const handleApply = () => {
-        // onFilter(query, date, source);
+        fetchArticles();
     };
 
     const handleReset = () => {
         setQuery('');
-        setDate('');
         setSource('');
-        setSourcesList([]);
-        // onFilter(query, date, source);
+        setArticles([]);
     };
-
-    const fetchArticles = () => {
-        if (category) {
-            setLoading(true);
-            getTopHeadlines(category, query, date, source)
-                .then(setArticles)
-                .finally(() => setLoading(false));
-        }
-    };
-
-    useEffect(() => {
-        // fetchArticles();
-    }, [category]);
 
     const [favorites, setFavorites] = useState<Article[]>([]);
 
@@ -94,7 +85,7 @@ const FiltersPage = () => {
 
     return (
         <div className='p-4'>
-            <div className='p-4 flex flex-wrap sm:flex-row gap-4 items-center justify-center'>
+            <div className='p-4 pt-0 flex flex-wrap sm:flex-row gap-4 items-center justify-center'>
                 <input
                     type='text'
                     placeholder='Keyword'
@@ -102,27 +93,19 @@ const FiltersPage = () => {
                     onChange={(e) => setQuery(e.target.value)}
                     className='p-2 rounded border'
                 />
-                <input
-                    type='date'
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className='p-2 rounded border'
-                />
 
-                {category === 'all' && (
-                    <select
-                        value={source}
-                        onChange={(e) => setSource(e.target.value)}
-                        className='p-2 rounded border'
-                    >
-                        <option value=''>All sources</option>
-                        {sourcesList.map((s) => (
-                            <option key={s.id} value={s.id}>
-                                {s.name}
-                            </option>
-                        ))}
-                    </select>
-                )}
+                <select
+                    value={source}
+                    onChange={(e) => setSource(e.target.value)}
+                    className='p-2 rounded border'
+                >
+                    <option value=''>All sources</option>
+                    {sourcesList.map((s) => (
+                        <option key={s.id} value={s.id}>
+                            {s.name}
+                        </option>
+                    ))}
+                </select>
 
                 <button
                     onClick={handleApply}
@@ -137,6 +120,11 @@ const FiltersPage = () => {
                     Reset
                 </button>
             </div>
+            {articles.length === 0 && (
+                <div className='mb-4 flex justify-center text-sm text-neutral-500'>
+                    Select one or more filters. Empty queries will be ignored.
+                </div>
+            )}
             <div className='grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
                 {loading
                     ? Array(6)

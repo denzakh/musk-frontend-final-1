@@ -29,14 +29,20 @@ const NewsCard: React.FC<Props> = ({
             className='pt-4 flex justify-between items-center'
             style={{ marginTop: 'auto' }}
         >
-            <a href={article.url} target='_blank' className='text-blue-500'>
+            <a
+                href={article.url}
+                target='_blank'
+                className='text-blue-500 dark:text-blue-300'
+            >
                 Read the article
             </a>
             {onSave && (
                 <button
                     onClick={() => onSave(article)}
                     className={`cursor-pointer ${
-                        isFavorite ? 'text-red-600' : 'text-blue-500'
+                        isFavorite
+                            ? 'text-red-600 dark:text-red-300'
+                            : 'text-blue-500 dark:text-blue-300'
                     } `}
                 >
                     {isFavorite ? 'Remove from favorites' : 'Add to Favorites'}
@@ -50,7 +56,7 @@ const NewsCard: React.FC<Props> = ({
                     alt={''}
                     width={60}
                     height={60}
-                    className='drop-shadow-sm'
+                    className='drop-shadow-sm brightness-120 dark:brightness-100'
                 />
             )}
         </div>

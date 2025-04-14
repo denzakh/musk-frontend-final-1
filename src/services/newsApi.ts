@@ -7,14 +7,12 @@ const BASE_URL = 'https://newsapi.org/v2';
 export const getTopHeadlines = async (
     category: string = 'general',
     q: string = '',
-    from: string = '',
     source: string = ''
 ): Promise<Article[]> => {
     const params = {
         apiKey: API_KEY,
         category: category === 'all' ? '' : category,
         q,
-        from,
         sources: source,
     };
 

@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import favoriteImg from '../assets/favorite.svg';
 import burgerImg from '../assets/burger.svg';
 import searchImg from '../assets/search.svg';
-import { useState } from 'react';
+import sunImg from '../assets/sun.svg';
+import moonImg from '../assets/moon.svg';
+import { useDarkMode } from '../hooks/useDarkMode';
 
 const categories = [
     'general',
@@ -15,24 +18,56 @@ const categories = [
 
 const Navbar = () => {
     const [open, setOpen] = useState<boolean>(false);
+    const [isDark, setIsDark] = useDarkMode();
 
     return (
         <nav className='relative bg-white dark:bg-gray-800 shadow p-4 flex justify-between items-center gap-4'>
-            <Link to={'/'}>
-                <div className='flex border-blue-500 border-2 font-semibold'>
-                    <div className='bg-blue-500 text-white px-2 py-1'>Musk</div>
-                    <div className='text-blue-500 bg-white px-2 py-1'>News</div>
+            <div className='flex items-center gap-4'>
+                <Link to={'/'}>
+                    <div className='flex border-blue-500 border-2 font-semibold dark:border-blue-300'>
+                        <div className='bg-blue-500 text-white dark:text-gray-800 dark:bg-blue-300 px-2 py-1'>
+                            Musk
+                        </div>
+                        <div className='text-blue-500 dark:text-blue-200 bg-white dark:bg-gray-800 px-2 py-1'>
+                            News
+                        </div>
+                    </div>
+                </Link>
+                <div className=''>
+                    <button
+                        onClick={() => setIsDark(!isDark)}
+                        className='p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700'
+                        title='Переключить тему'
+                    >
+                        {isDark ? (
+                            <img
+                                src={sunImg}
+                                alt={''}
+                                width={30}
+                                height={30}
+                                className=''
+                            />
+                        ) : (
+                            <img
+                                src={moonImg}
+                                alt={''}
+                                width={30}
+                                height={30}
+                                className=''
+                            />
+                        )}
+                    </button>
                 </div>
-            </Link>
+            </div>
             <div className={open ? 'block md:block' : 'hidden md:block'}>
-                <div className='bg-white flex gap-8 md:gap-4 text-2xl md:text-base absolute md:relative flex-col md:flex-row top-18 md:top-0 right-1 md-right-0 z-10 p-8 md:p-0 shadow-xl md:shadow-none rounded-xl'>
+                <div className='flex gap-8 md:gap-4 text-2xl md:text-base absolute md:relative flex-col md:flex-row top-18 md:top-0 right-1 md-right-0 z-10 p-8 md:p-0 shadow-xl md:shadow-none rounded-xl'>
                     {categories.map((cat) => (
                         <NavLink
                             key={cat}
                             to={`/category/${cat}`}
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'text-blue-500 font-semibold'
+                                    ? 'text-blue-500 font-semibold dark:text-white'
                                     : 'text-gray-600 dark:text-gray-300'
                             }
                             onClick={() => setOpen(false)}
@@ -48,7 +83,7 @@ const Navbar = () => {
                     to='/filters'
                     className={({ isActive }) =>
                         isActive
-                            ? 'text-blue-500 font-semibold'
+                            ? 'text-blue-500 font-semibold dark:text-white'
                             : 'text-gray-600 dark:text-gray-300'
                     }
                 >
@@ -67,7 +102,7 @@ const Navbar = () => {
                     to='/favorites'
                     className={({ isActive }) =>
                         isActive
-                            ? 'text-blue-500 font-semibold'
+                            ? 'text-blue-500 font-semibold dark:text-white'
                             : 'text-gray-600 dark:text-gray-300'
                     }
                 >
