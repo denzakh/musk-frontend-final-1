@@ -37,7 +37,7 @@ const Navbar = () => {
                     <button
                         onClick={() => setIsDark(!isDark)}
                         className='p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700'
-                        title='Переключить тему'
+                        title='switch theme'
                     >
                         {isDark ? (
                             <img

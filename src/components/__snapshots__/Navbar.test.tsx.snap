@@ -1,0 +1,162 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Navbar > snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="relative bg-white dark:bg-gray-800 shadow p-4 flex justify-between items-center gap-4"
+  >
+    <div
+      class="flex items-center gap-4"
+    >
+      <a
+        data-discover="true"
+        href="/"
+      >
+        <div
+          class="flex border-blue-500 border-2 font-semibold dark:border-blue-300"
+        >
+          <div
+            class="bg-blue-500 text-white dark:text-gray-800 dark:bg-blue-300 px-2 py-1"
+          >
+            Musk
+          </div>
+          <div
+            class="text-blue-500 dark:text-blue-200 bg-white dark:bg-gray-800 px-2 py-1"
+          >
+            News
+          </div>
+        </div>
+      </a>
+      <div
+        class=""
+      >
+        <button
+          class="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+          title="switch theme"
+        >
+          <img
+            alt=""
+            class=""
+            height="30"
+            src="mocked-moon.svg"
+            width="30"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="hidden md:block"
+    >
+      <div
+        class="flex gap-8 md:gap-4 text-2xl md:text-base absolute md:relative flex-col md:flex-row top-18 md:top-0 right-1 md-right-0 z-10 p-8 md:p-0 shadow-xl md:shadow-none rounded-xl"
+      >
+        <a
+          class="text-gray-600 dark:text-gray-300"
+          data-testid="link-/category/general"
+          href="/category/general"
+        >
+          General
+        </a>
+        <a
+          class="text-gray-600 dark:text-gray-300"
+          data-testid="link-/category/sports"
+          href="/category/sports"
+        >
+          Sports
+        </a>
+        <a
+          class="text-gray-600 dark:text-gray-300"
+          data-testid="link-/category/technology"
+          href="/category/technology"
+        >
+          Technology
+        </a>
+        <a
+          class="text-gray-600 dark:text-gray-300"
+          data-testid="link-/category/business"
+          href="/category/business"
+        >
+          Business
+        </a>
+        <a
+          class="text-gray-600 dark:text-gray-300"
+          data-testid="link-/category/health"
+          href="/category/health"
+        >
+          Health
+        </a>
+        <a
+          class="text-gray-600 dark:text-gray-300"
+          data-testid="link-/category/entertainment"
+          href="/category/entertainment"
+        >
+          Entertainment
+        </a>
+      </div>
+    </div>
+    <div
+      class="ml-[auto] md:ml-0 flex items-center gap-5"
+    >
+      <a
+        class="text-gray-600 dark:text-gray-300"
+        data-testid="link-/filters"
+        href="/filters"
+      >
+        <div
+          class="flex items-center gap-2"
+        >
+          <img
+            alt=""
+            class=""
+            height="30"
+            src="mocked-search.svg"
+            width="30"
+          />
+          <span
+            class="hidden lg:inline"
+          >
+            Search
+          </span>
+        </div>
+      </a>
+      <a
+        class="text-gray-600 dark:text-gray-300"
+        data-testid="link-/favorites"
+        href="/favorites"
+      >
+        <div
+          class="flex items-center gap-2"
+        >
+          <img
+            alt=""
+            class=""
+            height="30"
+            src="mocked-favorite.svg"
+            width="30"
+          />
+          <span
+            class="hidden lg:inline"
+          >
+            Favorites
+          </span>
+        </div>
+      </a>
+    </div>
+    <div
+      class="flex items-center md:hidden pl-2"
+    >
+      <button
+        class=""
+      >
+        <img
+          alt=""
+          class=""
+          height="30"
+          src="mocked-burger.svg"
+          width="30"
+        />
+      </button>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
