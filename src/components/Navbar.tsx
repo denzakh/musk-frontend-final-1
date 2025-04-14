@@ -22,7 +22,7 @@ const Navbar = () => {
 
     return (
         <nav className='relative bg-white dark:bg-gray-800 shadow p-4 flex justify-between items-center gap-4'>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-3 md:gap-4'>
                 <Link to={'/'}>
                     <div className='flex border-blue-500 border-2 font-semibold dark:border-blue-300'>
                         <div className='bg-blue-500 text-white dark:text-gray-800 dark:bg-blue-300 px-2 py-1'>
@@ -33,10 +33,10 @@ const Navbar = () => {
                         </div>
                     </div>
                 </Link>
-                <div className=''>
+                <div className='shrink-0'>
                     <button
                         onClick={() => setIsDark(!isDark)}
-                        className='p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700'
+                        className='p-0 rounded hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer flex items-center'
                         title='switch theme'
                     >
                         {isDark ? (
@@ -60,7 +60,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className={open ? 'block md:block' : 'hidden md:block'}>
-                <div className='flex gap-8 md:gap-4 text-2xl md:text-base absolute md:relative flex-col md:flex-row top-18 md:top-0 right-1 md-right-0 z-10 p-8 md:p-0 shadow-xl md:shadow-none rounded-xl'>
+                <div className='bg-white dark:bg-gray-800 flex gap-8 md:gap-4 text-2xl md:text-base absolute md:relative flex-col md:flex-row top-18 md:top-0 right-1 md-right-0 z-10 p-8 md:p-0 shadow-xl md:shadow-none rounded-xl'>
                     {categories.map((cat) => (
                         <NavLink
                             key={cat}
@@ -78,7 +78,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <div className='ml-[auto] md:ml-0 flex items-center gap-5'>
+            <div className='ml-[auto] md:ml-0 flex items-center gap-3 md:gap-4'>
                 <NavLink
                     to='/filters'
                     className={({ isActive }) =>
@@ -118,7 +118,7 @@ const Navbar = () => {
                     </div>
                 </NavLink>
             </div>
-            <div className='flex items-center md:hidden pl-2'>
+            <div className='flex items-center md:hidden'>
                 <button className='' onClick={() => setOpen((open) => !open)}>
                     <img
                         src={burgerImg}
