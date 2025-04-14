@@ -8,6 +8,7 @@ exports[`NewsCard > snapshot 1`] = `
     <img
       alt="Test Article"
       class="rounded-lg mb-2"
+      data-testid="img"
       src="https://via.placeholder.com/150"
     />
     <h2

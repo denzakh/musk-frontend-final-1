@@ -37,7 +37,7 @@ describe('NewsCard', () => {
             mockArticle.url
         );
 
-        expect(screen.getByRole('img')).toHaveAttribute(
+        expect(screen.getByTestId('img')).toHaveAttribute(
             'src',
             mockArticle.urlToImage
         );
@@ -69,22 +69,15 @@ describe('NewsCard', () => {
     it('debe mostrar el icono de favorito cuando el artículo es favorito', () => {
         render(<NewsCard article={mockArticle} isFavorite={true} />);
 
-        const bookmarkIcon = screen.getByRole('img');
+        const bookmarkIcon = screen.queryByTestId('favoriteIcon');
         expect(bookmarkIcon).toHaveAttribute('src', 'mocked-bookmark.svg');
-    });
-
-    it('debe mostrar la imagen del artículo si existe', () => {
-        render(<NewsCard article={mockArticle} />);
-
-        const image = screen.getByRole('img');
-        expect(image).toHaveAttribute('src', mockArticle.urlToImage);
     });
 
     it('no debe mostrar la imagen si no existe', () => {
         const articleWithoutImage = { ...mockArticle, urlToImage: null };
         render(<NewsCard article={articleWithoutImage} />);
 
-        const image = screen.queryByRole('img');
+        const image = screen.queryByTestId('img');
         expect(image).toBeNull();
     });
 

@@ -18,6 +18,7 @@ const NewsCard: React.FC<Props> = ({
                 src={article.urlToImage}
                 alt={article.title}
                 className='rounded-lg mb-2'
+                data-testid='img'
             />
         )}
         <h2 className='text-xl font-semibold'>{article.title}</h2>
@@ -57,6 +58,7 @@ const NewsCard: React.FC<Props> = ({
                     width={60}
                     height={60}
                     className='drop-shadow-sm brightness-120 dark:brightness-100'
+                    data-testid='favoriteIcon'
                 />
             )}
         </div>
