@@ -20,7 +20,7 @@ const mockArticle: Article = {
 
 describe('NewsCard', () => {
     it('debe renderizar la tarjeta de noticia correctamente', () => {
-        render(<NewsCard article={mockArticle} />);
+        render(<NewsCard article={mockArticle} onSave={mockOnSave} />);
 
         expect(screen.getByText(mockArticle.title)).toBeInTheDocument();
 
@@ -67,7 +67,13 @@ describe('NewsCard', () => {
     });
 
     it('debe mostrar el icono de favorito cuando el artículo es favorito', () => {
-        render(<NewsCard article={mockArticle} isFavorite={true} />);
+        render(
+            <NewsCard
+                article={mockArticle}
+                isFavorite={true}
+                onSave={mockOnSave}
+            />
+        );
 
         const bookmarkIcon = screen.queryByTestId('favoriteIcon');
         expect(bookmarkIcon).toHaveAttribute('src', 'mocked-bookmark.svg');
@@ -75,14 +81,16 @@ describe('NewsCard', () => {
 
     it('no debe mostrar la imagen si no existe', () => {
         const articleWithoutImage = { ...mockArticle, urlToImage: null };
-        render(<NewsCard article={articleWithoutImage} />);
+        render(<NewsCard article={articleWithoutImage} onSave={mockOnSave} />);
 
         const image = screen.queryByTestId('img');
         expect(image).toBeNull();
     });
 
     it('snapshot', () => {
-        const { asFragment } = render(<NewsCard article={mockArticle} />);
+        const { asFragment } = render(
+            <NewsCard article={mockArticle} onSave={mockOnSave} />
+        );
         expect(asFragment()).toMatchSnapshot();
     });
 });

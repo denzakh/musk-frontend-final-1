@@ -1,4 +1,3 @@
-// src/pages/Category.test.tsx
 import { render, screen, waitFor } from '@testing-library/react';
 import Category from './Category';
 import { BrowserRouter } from 'react-router-dom';
@@ -6,6 +5,7 @@ import * as newsApi from '../services/newsApi';
 import * as localStorageUtils from '../utils/localStorage';
 import { vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
+import { wait } from '../utils/helpers';
 
 const mockArticles = [
     {
@@ -32,8 +32,8 @@ vi.mock('../utils/localStorage', async () => {
     const actual = await vi.importActual('../utils/localStorage');
     return {
         ...actual,
-        getFavorites: () => vi.fn().mockReturnValue([]),
-        saveToFavorites: () => vi.fn(),
+        getFavorites: vi.fn().mockReturnValue([]),
+        saveToFavorites: vi.fn(),
         removeFromFavorites: vi.fn(),
     };
 });
@@ -57,7 +57,7 @@ describe('Category', () => {
 
     it('se guarda en favoritos al hacer clic', async () => {
         vi.spyOn(newsApi, 'getTopHeadlines').mockResolvedValue(mockArticles);
-        // const saveSpy = vi.spyOn(localStorageUtils, 'saveToFavorites');
+        const saveSpy = vi.spyOn(localStorageUtils, 'saveToFavorites');
 
         render(
             <BrowserRouter>
@@ -65,12 +65,16 @@ describe('Category', () => {
             </BrowserRouter>
         );
 
-        await screen.findByText('Test Article');
+        const articleText = await screen.findByText('Test Article');
+        expect(articleText).toBeInTheDocument();
+
         const btn = screen.getByText('Add to Favorites');
+        expect(btn).toBeInTheDocument();
+
         userEvent.click(btn);
 
-        console.log(localStorageUtils);
+        await wait(500);
 
-        // expect(saveSpy).toHaveBeenCalledWith(mockArticles[0]);
+        expect(saveSpy).toHaveBeenCalledWith(mockArticles[0]);
     });
 });

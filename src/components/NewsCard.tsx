@@ -3,16 +3,15 @@ import bookmarkImg from '../assets/bookmark.svg';
 
 interface Props {
     article: Article;
-    onSave?: (article: Article) => void;
+    onSave: (article: Article) => void;
     isFavorite?: boolean;
 }
 
-const NewsCard: React.FC<Props> = ({
-    article,
-    onSave = () => {},
-    isFavorite = false,
-}) => {
-    console.log(onSave);
+const NewsCard: React.FC<Props> = ({ article, onSave, isFavorite = false }) => {
+    const onClick = () => {
+        onSave(article);
+    };
+
     return (
         <div className='relative rounded-xl shadow-md p-4 bg-white dark:bg-gray-800 transition flex flex-col'>
             {article.urlToImage && (
@@ -39,20 +38,17 @@ const NewsCard: React.FC<Props> = ({
                 >
                     Read the article
                 </a>
-                {onSave && (
-                    <button
-                        onClick={() => onSave(article)}
-                        className={`cursor-pointer ${
-                            isFavorite
-                                ? 'text-red-600 dark:text-red-300'
-                                : 'text-blue-500 dark:text-blue-300'
-                        } `}
-                    >
-                        {isFavorite
-                            ? 'Remove from favorites'
-                            : 'Add to Favorites'}
-                    </button>
-                )}
+
+                <button
+                    onClick={onClick}
+                    className={`cursor-pointer ${
+                        isFavorite
+                            ? 'text-red-600 dark:text-red-300'
+                            : 'text-blue-500 dark:text-blue-300'
+                    } `}
+                >
+                    {isFavorite ? 'Remove from favorites' : 'Add to Favorites'}
+                </button>
             </div>
             <div className='absolute right-4 -top-1'>
                 {isFavorite && (

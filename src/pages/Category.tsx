@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getTopHeadlines } from '../services/newsApi';
 import { Article } from '../types/news';
 import NewsCard from '../components/NewsCard';
-import { saveToFavorites } from '../utils/localStorage';
-import { getFavorites, removeFromFavorites } from '../utils/localStorage';
+import * as localStorageUtils from '../utils/localStorage';
 import NewsCardSkeleton from '../components/NewsCardSkeleton';
 
 const Category = () => {
@@ -29,7 +28,7 @@ const Category = () => {
     const [favorites, setFavorites] = useState<Article[]>([]);
 
     const updateFavorites = () => {
-        setFavorites(getFavorites());
+        setFavorites(localStorageUtils.getFavorites());
     };
 
     useEffect(() => {
@@ -37,27 +36,17 @@ const Category = () => {
     }, []);
 
     const handleRemoveFavorites = (article: Article) => {
-        removeFromFavorites(article.url);
+        localStorageUtils.removeFromFavorites(article.url);
         updateFavorites();
     };
 
     const handleSaveFavorites = (article: Article) => {
-        saveToFavorites(article);
+        localStorageUtils.saveToFavorites(article);
         updateFavorites();
     };
 
     const isInFavorites = (article: Article) => {
-        console.log(favorites);
-        if (favorites.some((item) => item.url === article.url)) {
-            return {
-                onSave: () => handleRemoveFavorites(article),
-                isFavorite: true,
-            };
-        }
-        return {
-            onSave: () => handleSaveFavorites(article),
-            isFavorite: false,
-        };
+        return favorites.some((item) => item.url === article.url);
     };
 
     return (
@@ -67,13 +56,22 @@ const Category = () => {
                     ? Array(6)
                           .fill(1)
                           .map((_, i) => <NewsCardSkeleton key={i} />)
-                    : articles.map((article, idx) => (
-                          <NewsCard
-                              key={idx}
-                              article={article}
-                              {...isInFavorites(article)}
-                          />
-                      ))}
+                    : articles.map((article, idx) =>
+                          isInFavorites(article) ? (
+                              <NewsCard
+                                  key={idx}
+                                  article={article}
+                                  onSave={() => handleRemoveFavorites(article)}
+                                  isFavorite
+                              />
+                          ) : (
+                              <NewsCard
+                                  key={idx}
+                                  article={article}
+                                  onSave={() => handleSaveFavorites(article)}
+                              />
+                          )
+                      )}
             </div>
         </div>
     );
