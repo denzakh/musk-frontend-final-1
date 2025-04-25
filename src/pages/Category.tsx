@@ -28,24 +28,27 @@ const Category = () => {
 
     const [favorites, setFavorites] = useState<Article[]>([]);
 
-    useEffect(() => {
+    const updateFavorites = () => {
         setFavorites(getFavorites());
+    };
+
+    useEffect(() => {
+        updateFavorites();
     }, []);
 
     const handleRemoveFavorites = (article: Article) => {
         removeFromFavorites(article.url);
-        setFavorites(getFavorites());
+        updateFavorites();
     };
 
     const handleSaveFavorites = (article: Article) => {
         saveToFavorites(article);
-        setFavorites(getFavorites());
+        updateFavorites();
     };
 
     const isInFavorites = (article: Article) => {
-        if (
-            favorites.some((item) => item.publishedAt === article.publishedAt)
-        ) {
+        console.log(favorites);
+        if (favorites.some((item) => item.url === article.url)) {
             return {
                 onSave: () => handleRemoveFavorites(article),
                 isFavorite: true,
