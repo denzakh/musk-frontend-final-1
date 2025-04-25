@@ -11,7 +11,7 @@ const mockArticles = [
     {
         title: 'Test Article',
         url: 'https://example.com/test',
-        urlToImage: 'https://example.com/image.jpg',
+        urlToImage: 'https://placehold.co/300x200.png',
         publishedAt: '2023-01-01',
         description: 'Test description',
         source: { id: '', name: '' },
