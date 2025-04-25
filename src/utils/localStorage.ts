@@ -1,3 +1,4 @@
+//localStorage.ts
 import { Article } from '../types/news';
 
 const FAVORITES_KEY = 'favorites';
