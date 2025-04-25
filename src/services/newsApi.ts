@@ -28,12 +28,17 @@ export const getTopHeadlines = async (
     };
 
     try {
-        const { data } = await axios.get(`${BASE_URL}/top-headlines`, {
+        const response = await axios.get(`${BASE_URL}/top-headlines`, {
             params,
         });
-        return data.articles || [];
-    } catch (error) {
+        return response.data.articles || [];
+    } catch (error: unknown) {
         console.error('Error al obtener noticias:', error);
+
+        if (!API_KEY) {
+            throw new Error('API_KEY no está definido.');
+        }
+
         throw new Error(
             'No se pudieron obtener las noticias. Intenta nuevamente más tarde.'
         );
