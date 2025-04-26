@@ -20,8 +20,6 @@ const Navbar = () => {
     const [open, setOpen] = useState<boolean>(false);
     const [isDark, setIsDark] = useDarkMode();
 
-    console.log('isDark', isDark);
-
     return (
         <nav className='relative bg-white dark:bg-gray-800 shadow p-4 flex justify-between items-center gap-4'>
             <div className='flex items-center gap-3 md:gap-4'>
