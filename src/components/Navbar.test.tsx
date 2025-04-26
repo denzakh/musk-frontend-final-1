@@ -1,6 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
-import Navbar from './Navbar';
 import { BrowserRouter } from 'react-router-dom';
 import { ReactNode } from 'react';
 

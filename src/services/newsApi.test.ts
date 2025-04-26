@@ -2,7 +2,6 @@ import { describe, it, expect, vi, Mock } from 'vitest';
 import axios from 'axios';
 import { getTopHeadlines } from './newsApi';
 import { Article } from '../types/news';
-import { getApiKey } from '../config';
 
 const article1: Article = {
     url: 'https://example.com/1',

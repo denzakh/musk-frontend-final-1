@@ -37,7 +37,7 @@ const FiltersPage = () => {
         if (sourcesList.length === 0) {
             fetchSources();
         }
-    }, []);
+    }, [sourcesList.length]);
 
     const fetchArticles = () => {
         setLoading(true);
