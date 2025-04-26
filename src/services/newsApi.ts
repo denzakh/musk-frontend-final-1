@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Article } from '../types/news';
+import { getApiKey } from './config';
 
-const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
+const API_KEY = getApiKey();
 const BASE_URL = 'https://newsapi.org/v2';
 
 /**
@@ -32,13 +33,8 @@ export const getTopHeadlines = async (
             params,
         });
         return response.data.articles || [];
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error: unknown) {
-        console.error('Error al obtener noticias:', error);
-
-        if (!API_KEY) {
-            throw new Error('API_KEY no está definido.');
-        }
-
         throw new Error(
             'No se pudieron obtener las noticias. Intenta nuevamente más tarde.'
         );
