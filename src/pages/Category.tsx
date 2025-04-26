@@ -56,17 +56,17 @@ const Category = () => {
                     ? Array(6)
                           .fill(1)
                           .map((_, i) => <NewsCardSkeleton key={i} />)
-                    : articles.map((article, idx) =>
+                    : articles.map((article) =>
                           isInFavorites(article) ? (
                               <NewsCard
-                                  key={idx}
+                                  key={article.url}
                                   article={article}
                                   onSave={() => handleRemoveFavorites(article)}
                                   isFavorite
                               />
                           ) : (
                               <NewsCard
-                                  key={idx}
+                                  key={article.url}
                                   article={article}
                                   onSave={() => handleSaveFavorites(article)}
                               />

@@ -1,10 +1,25 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import FiltersPage from './FilterPage';
 import { vi, Mock } from 'vitest';
 import * as newsApi from '../services/newsApi';
 import { emptyFavoritesText } from '../consts';
 import axios from 'axios';
+import { wait } from '../utils/helpers';
+import * as localStorageUtils from '../utils/localStorage';
+
+const mockArticles = [
+    {
+        title: 'Test Article',
+        url: 'https://example.com/test',
+        urlToImage: 'https://placehold.co/300x200.png',
+        publishedAt: '2023-01-01',
+        description: 'Test description',
+        source: { id: '', name: '' },
+        author: '',
+        content: '',
+    },
+];
 
 // Mockeamos axios
 vi.mock('axios');
@@ -29,11 +44,12 @@ vi.mock('../utils/localStorage', async () => {
     };
 });
 
-describe('FiltersPage (con userEvent)', () => {
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
+beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+});
 
+describe('FiltersPage (con userEvent)', () => {
     it('muestra los filtros de búsqueda', () => {
         render(<FiltersPage />);
 
@@ -227,5 +243,82 @@ describe('FiltersPage (con userEvent)', () => {
             expect(screen.queryByText('Fuente 1')).not.toBeInTheDocument();
             expect(screen.queryByText('Fuente 2')).not.toBeInTheDocument();
         });
+    });
+
+    it('se guarda en favoritos al hacer clic', async () => {
+        // Mockeamos getTopHeadlines para devolver artículos
+        vi.spyOn(newsApi, 'getTopHeadlines').mockResolvedValue(mockArticles);
+
+        // Mockeamos saveToFavorites
+        const saveSpy = vi.spyOn(localStorageUtils, 'saveToFavorites');
+
+        render(<FiltersPage />);
+
+        const user = userEvent.setup();
+
+        const applyButton = screen.getByRole('button', {
+            name: /Apply filter/i,
+        });
+        await user.click(applyButton);
+
+        await wait(500);
+
+        // Verificamos que el artículo se muestra desde getTopHeadlines
+        const articleText = await screen.findByText('Test Article');
+        expect(articleText).toBeInTheDocument();
+
+        // Simulamos clic en el botón "Add to Favorites"
+        const btn = screen.getByText('Add to Favorites');
+        expect(btn).toBeInTheDocument();
+
+        userEvent.click(btn);
+
+        // Esperamos que saveToFavorites sea llamado con el artículo correcto
+        await wait(500);
+        expect(saveSpy).toHaveBeenCalledWith(mockArticles[0]);
+    });
+
+    it('eliminar tarjeta de favoritos', async () => {
+        // Mockeamos getTopHeadlines para devolver artículos
+        vi.spyOn(newsApi, 'getTopHeadlines').mockResolvedValue(mockArticles);
+
+        // Mockeamos getFavorites para devolver el mismo artículo
+        vi.spyOn(localStorageUtils, 'getFavorites').mockReturnValue([
+            mockArticles[0],
+        ]);
+
+        const removeFn = vi.spyOn(localStorageUtils, 'removeFromFavorites');
+
+        render(<FiltersPage />);
+
+        const user = userEvent.setup();
+
+        const applyButton = screen.getByRole('button', {
+            name: /Apply filter/i,
+        });
+        await user.click(applyButton);
+
+        await wait(500);
+
+        // Verificamos que el artículo se muestra desde getTopHeadlines
+        const articleFromApi = await screen.findByText('Test Article');
+        expect(articleFromApi).toBeInTheDocument();
+
+        // Verificamos que el artículo también se muestra desde localStorage
+        const articleFromFavorites = screen.getByText('Test Article');
+        expect(articleFromFavorites).toBeInTheDocument();
+
+        // Comparamos que ambos artículos son el mismo
+        expect(articleFromApi).toEqual(articleFromFavorites);
+
+        const removeButton = screen.getByText('Remove from favorites');
+        expect(removeButton).toBeInTheDocument();
+
+        fireEvent.click(removeButton);
+
+        await wait(500);
+
+        expect(removeFn).toHaveBeenCalledWith(mockArticles[0].url);
+        expect(removeFn).toHaveBeenCalledTimes(1);
     });
 });
