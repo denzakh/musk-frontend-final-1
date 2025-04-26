@@ -6,6 +6,8 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 -   **GitHib**: https://github.com/denzakh/musk-frontend-final-1
 -   **Figma**: https://www.figma.com/design/lo6iXkyCzPPlJOd6BPX2cR/musk-final-1?node-id=0-1&t=zzJyocICcnrHrd8e-1
 
+![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-white.jpg)
+
 ## 🛠 Tecnologías utilizadas
 
 -   **React** — biblioteca para construir interfaces de usuario.
@@ -21,8 +23,6 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 
 ![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-dark.jpg)
 
-![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-white.jpg)
-
 ## ✨ Funcionalidades principales
 
 -   Visualización de noticias actualizadas desde una API externa.
@@ -34,9 +34,15 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 -   Arquitectura modular basada en componentes reutilizables.
 -   Pruebas unitarias para garantizar calidad y funcionamiento del proyecto.
 
-![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/filter.jpg)
-
 ![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/mobile.jpg)
+
+## 📰 Características de la NewsAPI
+
+"Las solicitudes del navegador no están permitidas en el plan Desarrollador, excepto las solicitudes desde el localhost" https://newsapi.org/pricing Debido a esto, al realizar la implementación en Vercell es necesario utilizar un servidor proxy.
+
+Los parámetros `category` y `sources` no se pueden utilizar juntos. Por lo tanto, en la aplicación estas solicitudes se dividen en diferentes páginas.
+
+![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/filter.jpg)
 
 ## 🧪 Pruebas
 
