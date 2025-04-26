@@ -2,7 +2,7 @@
 
 Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en la dirección de Frontend Developer
 
--   **Deploy en Vercel**: Subir la aplicación para su acceso público.
+-   **Deploy en Vercel**: https://musk-frontend-final-1.vercel.app/
 -   **GitHib**: https://github.com/denzakh/musk-frontend-final-1
 -   **Figma**: https://www.figma.com/design/lo6iXkyCzPPlJOd6BPX2cR/musk-final-1?node-id=0-1&t=zzJyocICcnrHrd8e-1
 
