@@ -6,50 +6,7 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 -   **GitHib**: https://github.com/denzakh/musk-frontend-final-1
 -   **Figma**: https://www.figma.com/design/lo6iXkyCzPPlJOd6BPX2cR/musk-final-1?node-id=0-1&t=zzJyocICcnrHrd8e-1
 
-## 📁 Estructura del proyecto
-
-```
-src/
-├── assets/
-├── components/
-│   ├── Navbar.tsx
-│   ├── Navbar.test.tsx
-│   ├── NewsCard.tsx
-│   ├── NewsCard.test.tsx
-│   ├── NewsCardSkeleton.tsx
-│   └── __snapshots__/
-├── hooks/
-│   ├── useDarkMode.ts
-│   └── useDarkMode.test.tsx
-├── pages/
-│   ├── Category.tsx
-│   ├── Category.test.tsx
-│   ├── Favorites.tsx
-│   └── FilterPage.tsx
-├── services/
-│   └── newsApi.ts
-├── types/
-│   └── news.ts
-├── utils/
-├── App.tsx
-├── App.css
-├── index.css
-├── main.tsx
-├── setupTests.ts
-└── vite-env.d.ts
-/
-├── .env
-├── .gitignore
-├── eslint.config.js
-├── index.html
-├── package.json
-├── package-lock.json
-├── README.md
-├── tsconfig.json
-├── tsconfig.app.json
-├── tsconfig.node.json
-└── vite.config.ts
-```
+![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-white.jpg)
 
 ## 🛠 Tecnologías utilizadas
 
@@ -64,6 +21,8 @@ src/
 -   **Tailwind** — estilos personalizados.
 -   **ESLint** — herramienta de análisis de código para mantener buenas prácticas.
 
+![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-dark.jpg)
+
 ## ✨ Funcionalidades principales
 
 -   Visualización de noticias actualizadas desde una API externa.
@@ -75,14 +34,22 @@ src/
 -   Arquitectura modular basada en componentes reutilizables.
 -   Pruebas unitarias para garantizar calidad y funcionamiento del proyecto.
 
+![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/filter.jpg)
+
+![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/mobile.jpg)
+
 ## 🧪 Pruebas
 
 El proyecto incluye pruebas unitarias para los principales componentes:
 
 -   `Navbar.test.tsx` — pruebas para el componente Navbar.
 -   `NewsCard.test.tsx` — pruebas para el componente NewsCard.
--   `useDarkMode.test.tsx` — pruebas para el hook personalizado useDarkMode.
 -   `Category.test.tsx` — pruebas para la página Category.
+-   `FilterPage.test.tsx` — pruebas para la página FilterPage.
+-   `App.test.tsx` — pruebas de integración para la aplicación completa.
+-   `newsApi.test.ts` — pruebas para los servicios de la API
+-   `useDarkMode.test.tsx` — pruebas para el hook personalizado useDarkMode.
+-   `localStorage.test.ts` — pruebas para las utilidades de manejo de localStorage.
 
 Además, se utiliza la carpeta `__snapshots__` para almacenar capturas de los componentes.
 
@@ -111,4 +78,51 @@ npm run dev
 
 ```bash
 npm run test
+```
+
+## 📁 Estructura del proyecto
+
+```
+src/
+├── assets/
+├── components/
+│   ├── Navbar.tsx
+│   ├── Navbar.test.tsx
+│   ├── NewsCard.tsx
+│   ├── NewsCard.test.tsx
+│   ├── NewsCardSkeleton.tsx
+│   └── __snapshots__/
+├── hooks/
+│   ├── useDarkMode.ts
+│   └── useDarkMode.test.tsx
+├── pages/
+│   ├── Category.tsx
+│   ├── Category.test.tsx
+│   ├── Favorites.tsx
+│   ├── FilterPage.tsx
+│   └── FilterPage.test.tsx
+├── services/
+│   └── newsApi.ts
+├── types/
+│   └── news.ts
+├── utils/
+├── App.tsx
+├── App.css
+├── index.css
+├── main.tsx
+├── setupTests.ts
+└── vite-env.d.ts
+
+/
+├── .env
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package.json
+├── package-lock.json
+├── README.md
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+└── vite.config.ts
 ```

@@ -1,8 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 import { beforeAll, describe, it, expect, vi } from 'vitest';
 import { emptyFavoritesText } from './consts';
+import * as newsApi from './services/newsApi';
+import * as localStorageUtils from './utils/localStorage';
+import userEvent from '@testing-library/user-event';
+import { wait } from './utils/helpers';
 
 // Мокаем matchMedia для Vitest
 beforeAll(() => {
@@ -60,5 +64,65 @@ describe('App', () => {
             </MemoryRouter>
         );
         expect(await screen.findByText(/Technology/i)).toBeInTheDocument();
+    });
+
+    it('debería permitir agregar una noticia a favoritos', async () => {
+        // Mockeamos la API y localStorage
+        const mockArticles = [
+            {
+                title: 'Noticia de prueba',
+                url: 'https://example.com/test',
+                urlToImage: 'https://placehold.co/300x200.png',
+                publishedAt: '2023-01-01',
+                description: 'Descripción de prueba',
+                source: { id: '', name: 'Fuente de prueba' },
+                author: 'Autor de prueba',
+                content: 'Contenido de prueba',
+            },
+        ];
+
+        vi.spyOn(newsApi, 'getTopHeadlines').mockResolvedValue(mockArticles);
+        const saveSpy = vi.spyOn(localStorageUtils, 'saveToFavorites');
+
+        render(
+            <MemoryRouter>
+                <App />
+            </MemoryRouter>
+        );
+
+        // Esperamos que la noticia se cargue
+        const articleTitle = await screen.findByText('Noticia de prueba');
+        expect(articleTitle).toBeInTheDocument();
+
+        // Simulamos clic en "Add to Favorites"
+        const addToFavoritesButton = screen.getByText('Add to Favorites');
+        userEvent.click(addToFavoritesButton);
+
+        await wait(500);
+
+        // Verificamos que se haya llamado a saveToFavorites
+        expect(saveSpy).toHaveBeenCalledWith(mockArticles[0]);
+    });
+
+    it('debería manejar el cambio de tema (dark mode)', async () => {
+        render(
+            <MemoryRouter>
+                <App />
+            </MemoryRouter>
+        );
+
+        // Verificamos que el tema inicial sea claro
+        expect(document.documentElement.classList.contains('dark')).toBe(false);
+
+        // Simulamos clic en el botón de cambio de tema
+        const toggleThemeButton = screen.getByTitle('switch theme');
+        userEvent.click(toggleThemeButton);
+
+        // Verificamos que el tema cambie a oscuro
+        await waitFor(() => {
+            expect(document.documentElement.classList.contains('dark')).toBe(
+                true
+            );
+        });
     });
 });
