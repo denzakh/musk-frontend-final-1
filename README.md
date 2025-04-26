@@ -6,8 +6,6 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 -   **GitHib**: https://github.com/denzakh/musk-frontend-final-1
 -   **Figma**: https://www.figma.com/design/lo6iXkyCzPPlJOd6BPX2cR/musk-final-1?node-id=0-1&t=zzJyocICcnrHrd8e-1
 
-![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-white.jpg)
-
 ## 🛠 Tecnologías utilizadas
 
 -   **React** — biblioteca para construir interfaces de usuario.
@@ -22,6 +20,8 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 -   **ESLint** — herramienta de análisis de código para mantener buenas prácticas.
 
 ![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-dark.jpg)
+
+![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-white.jpg)
 
 ## ✨ Funcionalidades principales
 
