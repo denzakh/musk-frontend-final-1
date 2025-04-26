@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 import FiltersPage from './FilterPage';
 import { vi, Mock } from 'vitest';
 import * as newsApi from '../services/newsApi';
+import { emptyFavoritesText } from '../consts';
+import axios from 'axios';
 
 // Mockeamos axios
 vi.mock('axios');
@@ -48,6 +50,8 @@ describe('FiltersPage (con userEvent)', () => {
                 urlToImage: 'https://example.com/image.jpg',
                 publishedAt: '2025-04-26T00:00:00Z',
                 source: { name: 'Fuente de prueba' },
+                author: '',
+                content: '',
             },
         ]);
 
@@ -88,7 +92,6 @@ describe('FiltersPage (con userEvent)', () => {
         const applyButton = screen.getByRole('button', { name: /Apply/i });
         await user.click(applyButton);
 
-        // Aquí depende si en tu NewsCardSkeleton tienes data-testid
         expect(await screen.findAllByTestId('news-card-skeleton')).toHaveLength(
             6
         );
@@ -133,6 +136,96 @@ describe('FiltersPage (con userEvent)', () => {
             expect(
                 screen.queryByText('Artículo de prueba para reset')
             ).not.toBeInTheDocument();
+        });
+    });
+
+    // Verifica que se muestre el texto cuando no hay artículos
+    it('debería mostrar el texto cuando no hay artículos', async () => {
+        render(<FiltersPage />);
+        expect(screen.getByText(emptyFavoritesText)).toBeInTheDocument();
+    });
+
+    // Verifica que se muestren los esqueletos mientras se cargan los artículos
+    it('debería mostrar esqueletos mientras se cargan los artículos', async () => {
+        (newsApi.getTopHeadlines as Mock).mockImplementation(
+            () => new Promise(() => {}) // Simula una carga infinita
+        );
+
+        render(<FiltersPage />);
+        const user = userEvent.setup();
+
+        const applyButton = screen.getByRole('button', {
+            name: /Apply filter/i,
+        });
+        await user.click(applyButton);
+
+        expect(await screen.findAllByTestId('news-card-skeleton')).toHaveLength(
+            6
+        );
+    });
+
+    // Verifica que los artículos se muestren correctamente
+    it('debería mostrar los artículos correctamente', async () => {
+        const mockArticles = [
+            {
+                url: 'https://example.com/1',
+                title: 'Artículo de prueba 1',
+                urlToImage: 'https://placehold.co/300x200.png',
+                publishedAt: '2023-01-01',
+                description: 'Descripción de prueba',
+                source: { id: '', name: '' },
+                author: '',
+                content: '',
+            },
+        ];
+
+        (newsApi.getTopHeadlines as Mock).mockResolvedValue(mockArticles);
+
+        render(<FiltersPage />);
+        const user = userEvent.setup();
+
+        const applyButton = screen.getByRole('button', {
+            name: /Apply filter/i,
+        });
+        await user.click(applyButton);
+
+        expect(
+            await screen.findByText('Artículo de prueba 1')
+        ).toBeInTheDocument();
+    });
+
+    it('debería cargar y mostrar las fuentes correctamente', async () => {
+        // Mockeamos la respuesta de axios.get para las fuentes
+        (axios.get as Mock).mockResolvedValue({
+            data: {
+                sources: [
+                    { id: 'source1', name: 'Fuente 1' },
+                    { id: 'source2', name: 'Fuente 2' },
+                ],
+            },
+        });
+
+        render(<FiltersPage />);
+
+        // Esperamos a que las fuentes se carguen y se muestren en el select
+        await waitFor(() => {
+            expect(screen.getByText('Fuente 1')).toBeInTheDocument();
+            expect(screen.getByText('Fuente 2')).toBeInTheDocument();
+        });
+    });
+
+    it('debería manejar errores al cargar las fuentes', async () => {
+        // Mockeamos un error en axios.get
+        (axios.get as Mock).mockRejectedValue(
+            new Error('Error al cargar fuentes')
+        );
+
+        render(<FiltersPage />);
+
+        // Verificamos que no se muestren opciones adicionales en el select
+        await waitFor(() => {
+            expect(screen.queryByText('Fuente 1')).not.toBeInTheDocument();
+            expect(screen.queryByText('Fuente 2')).not.toBeInTheDocument();
         });
     });
 });

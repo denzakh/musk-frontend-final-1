@@ -37,6 +37,7 @@ exports[`Navbar > snapshot 1`] = `
           <img
             alt=""
             class=""
+            data-testid="moonIcon"
             height="30"
             src="mocked-moon.svg"
             width="30"

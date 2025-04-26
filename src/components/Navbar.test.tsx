@@ -12,12 +12,6 @@ vi.mock('../assets/moon.svg', () => ({ default: 'mocked-moon.svg' }));
 
 export const mockToggle = vi.fn();
 
-vi.mock('../hooks/useDarkMode', () => {
-    return {
-        useDarkMode: vi.fn(() => [false, mockToggle]),
-    };
-});
-
 // Creamos un mock para useNavigate y lo exportamos para verificarlo luego
 const mockNavigate = vi.fn();
 
@@ -66,12 +60,55 @@ vi.mock('react-router-dom', async () => {
     };
 });
 
-describe('Navbar', () => {
-    beforeEach(() => {
-        mockToggle.mockClear();
+beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+});
+
+describe('Navbar', async () => {
+    it('snapshot', async () => {
+        vi.doMock('../hooks/useDarkMode', () => {
+            return {
+                useDarkMode: vi.fn(() => [false, mockToggle]),
+            };
+        });
+        const { default: Navbar } = await import('./Navbar');
+
+        const { asFragment } = render(
+            <BrowserRouter>
+                <Navbar />
+            </BrowserRouter>
+        );
+        expect(asFragment()).toMatchSnapshot();
     });
 
-    it('renderiza correctamente', () => {
+    it('existe icon dark en el theme dark', async () => {
+        vi.doMock('../hooks/useDarkMode', () => {
+            return {
+                useDarkMode: vi.fn(() => [true, mockToggle]), // Устанавливаем isDark = true
+            };
+        });
+
+        const { default: Navbar } = await import('./Navbar');
+
+        render(
+            <BrowserRouter>
+                <Navbar />
+            </BrowserRouter>
+        );
+
+        // Проверяем, что отображается иконка солнца (светлая тема)
+        expect(screen.getByTestId('sunIcon')).toBeInTheDocument();
+    });
+
+    it('renderiza correctamente', async () => {
+        vi.doMock('../hooks/useDarkMode', () => {
+            return {
+                useDarkMode: vi.fn(() => [false, mockToggle]),
+            };
+        });
+        const { default: Navbar } = await import('./Navbar');
+
         render(
             <BrowserRouter>
                 <Navbar />
@@ -81,19 +118,34 @@ describe('Navbar', () => {
         expect(screen.getByText(/News/)).toBeInTheDocument();
     });
 
-    it('activa el cambio de tema al hacer clic', () => {
+    it('activa el cambio de tema al hacer clic', async () => {
+        vi.doMock('../hooks/useDarkMode', () => {
+            return {
+                useDarkMode: vi.fn(() => [false, mockToggle]),
+            };
+        });
+        const { default: Navbar } = await import('./Navbar');
+
         render(
             <BrowserRouter>
                 <Navbar />
             </BrowserRouter>
         );
         const toggleBtn = screen.getByTitle('switch theme');
+        expect(screen.getByTestId('moonIcon')).toBeInTheDocument();
         fireEvent.click(toggleBtn);
 
         expect(mockToggle).toHaveBeenCalledTimes(1);
     });
 
-    it('debe navegar a la categoría "General" al hacer clic en el enlace', () => {
+    it('debe navegar a la categoría "General" al hacer clic en el enlace', async () => {
+        vi.doMock('../hooks/useDarkMode', () => {
+            return {
+                useDarkMode: vi.fn(() => [false, mockToggle]),
+            };
+        });
+        const { default: Navbar } = await import('./Navbar');
+
         render(
             <BrowserRouter>
                 <Navbar />
@@ -108,14 +160,5 @@ describe('Navbar', () => {
 
         // Verificar que se haya llamado a navigate con la ruta correcta
         expect(mockNavigate).toHaveBeenCalledWith('/category/general');
-    });
-
-    it('snapshot', () => {
-        const { asFragment } = render(
-            <BrowserRouter>
-                <Navbar />
-            </BrowserRouter>
-        );
-        expect(asFragment()).toMatchSnapshot();
     });
 });
