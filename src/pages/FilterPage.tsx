@@ -6,6 +6,7 @@ import { getFavorites, removeFromFavorites } from '../utils/localStorage';
 import NewsCardSkeleton from '../components/NewsCardSkeleton';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { emptyFavoritesText } from '../consts';
 
 const FiltersPage = () => {
     const [articles, setArticles] = useState<Article[]>([]);
@@ -124,7 +125,7 @@ const FiltersPage = () => {
             </div>
             {articles.length === 0 && (
                 <div className='mb-4 flex justify-center text-sm text-neutral-500'>
-                    Select one or more filters. Empty queries will be ignored.
+                    {emptyFavoritesText}
                 </div>
             )}
             <div className='grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>

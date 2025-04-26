@@ -3,6 +3,7 @@ import { Article } from '../types/news';
 import { getFavorites, removeFromFavorites } from '../utils/localStorage';
 import NewsCard from '../components/NewsCard';
 import { motion, AnimatePresence } from 'framer-motion';
+import { emptyFavoritesText } from '../consts';
 
 const Favorites = () => {
     const [favorites, setFavorites] = useState<Article[]>([]);
@@ -44,8 +45,7 @@ const Favorites = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        No hay noticias destacadas. Agrega algunas a tus
-                        favoritos para verlas aquí.
+                        {emptyFavoritesText}
                     </motion.p>
                 )}
             </AnimatePresence>

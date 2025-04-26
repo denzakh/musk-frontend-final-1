@@ -3,6 +3,7 @@ import Favorites from '../pages/Favorites';
 import { vi, Mock } from 'vitest';
 import * as localStorageUtils from '../utils/localStorage';
 import { Article } from '../types/news';
+import { emptyFavoritesText } from '../consts';
 
 // Mockeamos funciones de localStorage
 vi.mock('../utils/localStorage', async () => {
@@ -13,9 +14,6 @@ vi.mock('../utils/localStorage', async () => {
         removeFromFavorites: vi.fn(),
     };
 });
-
-const emptyText =
-    'No hay noticias destacadas. Agrega algunas a tus favoritos para verlas aquí.';
 
 describe('Favorites', () => {
     const mockArticles: Article[] = [
@@ -52,7 +50,7 @@ describe('Favorites', () => {
         render(<Favorites />);
 
         // Verificamos que el mensaje se muestre
-        expect(screen.getByText(emptyText)).toBeInTheDocument();
+        expect(screen.getByText(emptyFavoritesText)).toBeInTheDocument();
     });
 
     it('elimina una noticia favorita al hacer clic en eliminar', () => {
@@ -67,6 +65,6 @@ describe('Favorites', () => {
         fireEvent.click(removeButton);
 
         // Verificamos que después de eliminar, se muestra el mensaje de vacío
-        expect(screen.getByText(emptyText)).toBeInTheDocument();
+        expect(screen.getByText(emptyFavoritesText)).toBeInTheDocument();
     });
 });
