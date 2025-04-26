@@ -6,7 +6,9 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 -   **GitHib**: https://github.com/denzakh/musk-frontend-final-1
 -   **Figma**: https://www.figma.com/design/lo6iXkyCzPPlJOd6BPX2cR/musk-final-1?node-id=0-1&t=zzJyocICcnrHrd8e-1
 
-![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-white.jpg)
+---
+
+![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-dark.jpg)
 
 ## 🛠 Tecnologías utilizadas
 
@@ -21,7 +23,7 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 -   **Tailwind** — estilos personalizados.
 -   **ESLint** — herramienta de análisis de código para mantener buenas prácticas.
 
-![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-dark.jpg)
+![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/desktop-white.jpg)
 
 ## ✨ Funcionalidades principales
 
@@ -41,6 +43,8 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 "Las solicitudes del navegador no están permitidas en el plan Desarrollador, excepto las solicitudes desde el localhost" https://newsapi.org/pricing Debido a esto, al realizar la implementación en Vercell es necesario utilizar un servidor proxy.
 
 Los parámetros `category` y `sources` no se pueden utilizar juntos. Por lo tanto, en la aplicación estas solicitudes se dividen en diferentes páginas.
+
+Hay límites en la cantidad de solicitudes por día.
 
 ![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/filter.jpg)
 
