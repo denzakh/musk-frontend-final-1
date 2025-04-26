@@ -11,8 +11,8 @@ const isLocalStorageAvailable = (): boolean => {
         localStorage.setItem(testKey, testKey);
         localStorage.removeItem(testKey);
         return true;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
-        console.log(e);
         return false;
     }
 };
@@ -37,8 +37,9 @@ export const getFavorites = (): Article[] => {
     const stored = localStorage.getItem(FAVORITES_KEY);
     try {
         return stored ? JSON.parse(stored) : [];
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
-        console.error('Error al leer favoritos de localStorage:', e);
+        console.error('Error al leer favoritos de localStorage');
         return []; // Retorna un arreglo vacío si ocurre un error al parsear.
     }
 };
