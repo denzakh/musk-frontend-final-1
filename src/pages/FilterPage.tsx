@@ -7,6 +7,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { emptyFavoritesText } from '../consts';
 
+const BASE_URL = import.meta.env.VITE_NEWS_API_URL;
+
 const FiltersPage = () => {
     const [articles, setArticles] = useState<Article[]>([]);
     const [query, setQuery] = useState('');
@@ -21,14 +23,12 @@ const FiltersPage = () => {
     useEffect(() => {
         const fetchSources = async () => {
             try {
-                const { data } = await axios.get(
-                    'https://newsapi.org/v2/top-headlines/sources',
-                    {
-                        params: {
-                            apiKey: import.meta.env.VITE_NEWS_API_KEY,
-                        },
-                    }
-                );
+                const { data } = await axios.get(`${BASE_URL}`, {
+                    params: {
+                        apiKey: import.meta.env.VITE_NEWS_API_KEY,
+                        type: 'sources',
+                    },
+                });
                 setSourcesList(data.sources);
             } catch (error) {
                 console.error('Error loading sources:', error);

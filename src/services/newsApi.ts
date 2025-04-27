@@ -3,7 +3,7 @@ import { Article } from '../types/news';
 import { getApiKey } from './config';
 
 const API_KEY = getApiKey();
-const BASE_URL = 'https://newsapi.org/v2';
+const BASE_URL = import.meta.env.VITE_NEWS_API_URL;
 
 /**
  * Obtiene las noticias más recientes de una categoría o búsqueda.
@@ -29,7 +29,7 @@ export const getTopHeadlines = async (
     };
 
     try {
-        const response = await axios.get(`${BASE_URL}/top-headlines`, {
+        const response = await axios.get(`${BASE_URL}`, {
             params,
         });
         return response.data.articles || [];
