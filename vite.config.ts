@@ -18,6 +18,9 @@ const config: UserConfigExport = defineConfig({
             reportOnFailure: true,
         },
     },
+    server: {
+        port: (process.env.PORT as unknown as number) || 3000,
+    },
 });
 
 export default config;
