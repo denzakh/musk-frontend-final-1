@@ -1,1 +1,2 @@
-export const getApiKey = () => process.env.NEWS_API_KEY;
+export const getApiKey = () =>
+    import.meta.env.VITE_NEWS_API_URL || process.env.NEWS_API_URL;
