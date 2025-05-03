@@ -40,7 +40,7 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 
 ## 📰 Características de la NewsAPI
 
-"Las solicitudes del navegador no están permitidas en el plan Desarrollador, excepto las solicitudes desde el localhost" https://newsapi.org/pricing Debido a esto, al realizar la implementación en Vercell es necesario utilizar un servidor proxy.
+[Las solicitudes del navegador no están permitidas en el plan Desarrollador, excepto las solicitudes desde el localhost](https://newsapi.org/pricing). Debido a esto es necesario utilizar un servidor proxy. Este proyecto utiliza las funciones sin servidor de Vercel como servidor proxy.
 
 Los parámetros `category` y `sources` no se pueden utilizar juntos. Por lo tanto, en la aplicación estas solicitudes se dividen en diferentes páginas.
 
@@ -99,7 +99,10 @@ npm run test
 ## 📁 Estructura del proyecto
 
 ```
-src/
+/api/
+└── news.ts
+
+/src/
 ├── assets/
 ├── components/
 │   ├── Navbar.tsx
