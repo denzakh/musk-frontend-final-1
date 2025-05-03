@@ -78,13 +78,19 @@ cd musk-frontend-final-1
 npm install
 ```
 
-3. **Iniciar el proyecto en modo desarrollo:**
+3. **Instalar Vercel CLI globalmente**. La API de noticias no permite recibirlas directamente desde el navegador, por lo que se necesita un servidor intermedio.
 
 ```bash
-npm run dev
+npm i -g vercel
 ```
 
-4. **Ejecutar las pruebas:**
+4. **Iniciar el proyecto en modo desarrollo:**
+
+```bash
+npm run vercel
+```
+
+5. **Ejecutar las pruebas:**
 
 ```bash
 npm run test

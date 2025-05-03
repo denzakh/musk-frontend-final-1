@@ -8,7 +8,8 @@
     "email": "den.zakh@gmail.com"
   },
   "scripts": {
-    "dev": "vercel dev",
+    "vercel": "vercel dev",
+    "dev": "vite dev",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
