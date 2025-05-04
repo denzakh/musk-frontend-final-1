@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const NEWS_API_KEY = process.env.NEWS_API_KEY;
+const NEWS_API_KEY = 'bf607a2b66624b21ba4c8dc5adf70357'; //process.env.NEWS_API_KEY;
 const NEWS_API_URL = 'https://newsapi.org/v2';
 
 interface NewsApiParams {
