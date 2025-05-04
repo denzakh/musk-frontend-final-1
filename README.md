@@ -35,6 +35,7 @@ Aplicación web para lectura de noticias. Proyecto final de la escuela Musk en l
 -   Skeletons para carga de noticias (efecto de carga).
 -   Arquitectura modular basada en componentes reutilizables.
 -   Pruebas unitarias para garantizar calidad y funcionamiento del proyecto.
+-   Diseño responsivo
 
 ![](https://github.com/denzakh/musk-frontend-final-1/raw/main/doc/mobile.jpg)
 
