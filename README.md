@@ -50,11 +50,12 @@ Hay límites en la cantidad de solicitudes por día.
 
 ## 🧪 Pruebas
 
-El proyecto incluye pruebas unitarias para los principales componentes:
+El proyecto incluye pruebas unitarias para los principales componentes, un total de 55 pruebas en 9 archivos:
 
 -   `Navbar.test.tsx` — pruebas para el componente Navbar.
 -   `NewsCard.test.tsx` — pruebas para el componente NewsCard.
 -   `Category.test.tsx` — pruebas para la página Category.
+-   `Favirites.test.tsx` — pruebas para la página Favorites.
 -   `FilterPage.test.tsx` — pruebas para la página FilterPage.
 -   `App.test.tsx` — pruebas de integración para la aplicación completa.
 -   `newsApi.test.ts` — pruebas para los servicios de la API
