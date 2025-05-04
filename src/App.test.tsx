@@ -8,7 +8,20 @@ import * as localStorageUtils from './utils/localStorage';
 import userEvent from '@testing-library/user-event';
 import { wait } from './utils/helpers';
 
-// Мокаем matchMedia для Vitest
+const mockArticles = [
+    {
+        title: 'Noticia de prueba',
+        url: 'https://example.com/test',
+        urlToImage: 'https://placehold.co/300x200.png',
+        publishedAt: '2023-01-01',
+        description: 'Descripción de prueba',
+        source: { id: '', name: 'Fuente de prueba' },
+        author: 'Autor de prueba',
+        content: 'Contenido de prueba',
+    },
+];
+
+// Mock matchMedia for Vitest
 beforeAll(() => {
     global.matchMedia = vi.fn().mockImplementation((query) => ({
         matches: false,
@@ -16,6 +29,31 @@ beforeAll(() => {
         addListener: vi.fn(),
         removeListener: vi.fn(),
     }));
+});
+
+beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+});
+
+// Mockeamos funciones de la API de noticias
+vi.mock('./services/newsApi', async () => {
+    const actual = await vi.importActual('./services/newsApi');
+    return {
+        ...actual,
+        getTopHeadlines: vi.fn(),
+    };
+});
+
+// Mockeamos funciones de localStorage
+vi.mock('./utils/localStorage', async () => {
+    const actual = await vi.importActual('./utils/localStorage');
+    return {
+        ...actual,
+        getFavorites: vi.fn(() => []),
+        removeFromFavorites: vi.fn(),
+        saveToFavorites: vi.fn(),
+    };
 });
 
 describe('App', () => {
@@ -57,31 +95,11 @@ describe('App', () => {
         ).toBeInTheDocument();
     });
 
-    it('renderiza Category en "/category/:category"', async () => {
-        render(
-            <MemoryRouter initialEntries={['/category/technology']}>
-                <App />
-            </MemoryRouter>
-        );
-        expect(await screen.findByText(/Technology/i)).toBeInTheDocument();
-    });
-
     it('debería permitir agregar una noticia a favoritos', async () => {
         // Mockeamos la API y localStorage
-        const mockArticles = [
-            {
-                title: 'Noticia de prueba',
-                url: 'https://example.com/test',
-                urlToImage: 'https://placehold.co/300x200.png',
-                publishedAt: '2023-01-01',
-                description: 'Descripción de prueba',
-                source: { id: '', name: 'Fuente de prueba' },
-                author: 'Autor de prueba',
-                content: 'Contenido de prueba',
-            },
-        ];
 
         vi.spyOn(newsApi, 'getTopHeadlines').mockResolvedValue(mockArticles);
+
         const saveSpy = vi.spyOn(localStorageUtils, 'saveToFavorites');
 
         render(

@@ -6,8 +6,9 @@ import NewsCardSkeleton from '../components/NewsCardSkeleton';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { emptyFavoritesText } from '../consts';
+import { getApiUrl } from '../configApi';
 
-const BASE_URL = import.meta.env.VITE_NEWS_API_URL;
+const BASE_URL = getApiUrl();
 
 const FiltersPage = () => {
     const [articles, setArticles] = useState<Article[]>([]);

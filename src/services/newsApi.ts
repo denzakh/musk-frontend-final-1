@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { Article } from '../types/news';
-import { getApiKey } from './config';
+import { getApiUrl } from '../configApi';
 
-const API_KEY = getApiKey();
-const BASE_URL = import.meta.env.VITE_NEWS_API_URL;
+const BASE_URL = getApiUrl();
 
 /**
  * Obtiene las noticias más recientes de una categoría o búsqueda.
@@ -17,12 +16,7 @@ export const getTopHeadlines = async (
     q: string = '',
     source: string = ''
 ): Promise<Article[]> => {
-    if (!API_KEY) {
-        throw new Error('API_KEY no está definido.');
-    }
-
     const params = {
-        apiKey: API_KEY,
         category: category === 'all' ? '' : category,
         q,
         sources: source,

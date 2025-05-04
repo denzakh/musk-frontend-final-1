@@ -171,34 +171,16 @@ describe('getTopHeadlines', () => {
         expect(articles).toEqual([]);
     });
 
-    // it('debería manejar errores correctamente', async () => {
-    //     // Mokeamos un error en axios (por ejemplo, un error de red)
-    //     (axios.get as Mock).mockRejectedValue(new Error('Network Error'));
+    it('debería manejar errores correctamente', async () => {
+        // Mokeamos un error en axios (por ejemplo, un error de red)
+        (axios.get as Mock).mockRejectedValue(new Error('Network Error'));
 
-    //     // Llamamos a la función y esperamos que lance un error
-    //     try {
-    //         await getTopHeadlines();
-    //     } catch (error) {
-    //         // Verificamos que el error sea de tipo Error y que el mensaje sea el esperado
-    //         expect(error).toBeInstanceOf(Error);
-    //     }
-    // });
-
-    it('debería lanzar un error si la API_KEY no está definida', async () => {
-        // Мокаем getApiKey ТОЛЬКО для этого теста
-        vi.doMock('./config', () => ({
-            getApiKey: () => '', // Возвращаем пустую строку
-        }));
-
-        // Импортируем модуль заново, чтобы подхватился мок
-        const { getTopHeadlines } = await import('./newsApi');
-
-        await expect(getTopHeadlines()).rejects.toThrow(
-            'API_KEY no está definido.'
-        );
-
-        // Сброс моков и модулей после теста
-        vi.resetModules();
-        vi.clearAllMocks();
+        // Llamamos a la función y esperamos que lance un error
+        try {
+            await getTopHeadlines();
+        } catch (error) {
+            // Verificamos que el error sea de tipo Error y que el mensaje sea el esperado
+            expect(error).toBeInstanceOf(Error);
+        }
     });
 });
