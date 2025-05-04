@@ -2,7 +2,8 @@
   "name": "musk-frontend-final-1",
   "private": false,
   "version": "0.0.1",
-  "type": "module",
+  "module": "NodeNext",
+  "moduleResolution": "NodeNext",
   "author": {
     "name": "Den Zakh",
     "email": "den.zakh@gmail.com"
