@@ -6,6 +6,7 @@ const NEWS_API_URL = 'https://newsapi.org/v2';
 interface NewsApiParams {
     apiKey: string;
     q?: string;
+    sources?: string;
     category?: string;
     country?: string;
     pageSize?: number;
@@ -35,6 +36,7 @@ export default async function handler(
     const {
         type = 'articles',
         q,
+        sources,
         category,
         country,
         pageSize,
@@ -56,6 +58,7 @@ export default async function handler(
         } else {
             url = `${NEWS_API_URL}/top-headlines`;
             if (q) params.q = q as string;
+            if (sources) params.sources = sources as string;
             if (category) params.category = category as string;
             if (country) params.country = country as string;
             if (pageSize) params.pageSize = Number(pageSize);
