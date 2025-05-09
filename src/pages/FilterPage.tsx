@@ -5,7 +5,7 @@ import * as localStorageUtils from '../utils/localStorage';
 import NewsCardSkeleton from '../components/NewsCardSkeleton';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { apiUrl, emptyFavoritesText } from '../consts';
+import { apiUrl, emptyFiltersText } from '../consts';
 
 const BASE_URL = apiUrl;
 
@@ -122,7 +122,7 @@ const FiltersPage = () => {
             </div>
             {articles.length === 0 && (
                 <div className='mb-4 flex justify-center text-sm text-neutral-500'>
-                    {emptyFavoritesText}
+                    {emptyFiltersText}
                 </div>
             )}
             <div className='grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import FiltersPage from './FilterPage';
 import { vi, Mock } from 'vitest';
 import * as newsApi from '../services/newsApi';
-import { emptyFavoritesText } from '../consts';
+import { emptyFiltersText } from '../consts';
 import axios from 'axios';
 import { wait } from '../utils/helpers';
 import * as localStorageUtils from '../utils/localStorage';
@@ -158,7 +158,7 @@ describe('FiltersPage (con userEvent)', () => {
     // Verifica que se muestre el texto cuando no hay artículos
     it('debería mostrar el texto cuando no hay artículos', async () => {
         render(<FiltersPage />);
-        expect(screen.getByText(emptyFavoritesText)).toBeInTheDocument();
+        expect(screen.getByText(emptyFiltersText)).toBeInTheDocument();
     });
 
     // Verifica que se muestren los esqueletos mientras se cargan los artículos
