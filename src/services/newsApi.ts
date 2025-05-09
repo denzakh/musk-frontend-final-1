@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { Article } from '../types/news';
-import { getApiUrl } from '../configApi';
+import { apiUrl } from '../consts';
 
-const BASE_URL = getApiUrl();
+const BASE_URL = apiUrl;
 
 /**
  * Obtiene las noticias más recientes de una categoría o búsqueda.

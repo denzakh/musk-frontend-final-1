@@ -5,10 +5,9 @@ import * as localStorageUtils from '../utils/localStorage';
 import NewsCardSkeleton from '../components/NewsCardSkeleton';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { emptyFavoritesText } from '../consts';
-import { getApiUrl } from '../configApi';
+import { apiUrl, emptyFavoritesText } from '../consts';
 
-const BASE_URL = getApiUrl();
+const BASE_URL = apiUrl;
 
 const FiltersPage = () => {
     const [articles, setArticles] = useState<Article[]>([]);

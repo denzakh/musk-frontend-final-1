@@ -101,8 +101,22 @@ npm run test
 ## 📁 Estructura del proyecto
 
 ```
+/
+├── .env
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package.json
+├── package-lock.json
+├── README.md
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+└── vite.config.ts
+
 /api/
-└── news.ts
+├── news.ts
+└── tsconfig.json
 
 /src/
 ├── assets/
@@ -120,30 +134,24 @@ npm run test
 │   ├── Category.tsx
 │   ├── Category.test.tsx
 │   ├── Favorites.tsx
+│   ├── Favorites.test.tsx
 │   ├── FilterPage.tsx
 │   └── FilterPage.test.tsx
 ├── services/
-│   └── newsApi.ts
+│   ├── newsApi.ts
+│   └── newsApi.test.ts
 ├── types/
 │   └── news.ts
 ├── utils/
+│   ├── helpers.ts
+│   ├── localStorage.ts
+│   └── localStorage.test.ts
 ├── App.tsx
 ├── App.css
+├── App.test.tsx
+├── consts.ts
 ├── index.css
 ├── main.tsx
 ├── setupTests.ts
 └── vite-env.d.ts
-
-/
-├── .env
-├── .gitignore
-├── eslint.config.js
-├── index.html
-├── package.json
-├── package-lock.json
-├── README.md
-├── tsconfig.json
-├── tsconfig.app.json
-├── tsconfig.node.json
-└── vite.config.ts
 ```
