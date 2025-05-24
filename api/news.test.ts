@@ -110,4 +110,25 @@ describe('API news handler', () => {
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({ error: 'Error de servidor' });
     });
+
+    it('debe retornar error si falta apiKey', async () => {
+        // Guardamos el valor original de la variable de entorno
+        const originalApiKey = process.env.NEWS_API_KEY;
+        // Eliminamos apiKey
+        delete process.env.NEWS_API_KEY;
+
+        const req = {
+            method: 'GET',
+            query: { q: 'test' },
+        };
+        const res = mockRes();
+
+        await handler(req as any, res);
+
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json).toHaveBeenCalledWith({ error: 'Error de servidor' });
+
+        // Restauramos la variable de entorno
+        process.env.NEWS_API_KEY = originalApiKey;
+    });
 });
