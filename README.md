@@ -51,7 +51,7 @@ Hay límites en la cantidad de solicitudes por día.
 
 ## 🧪 Pruebas
 
-El proyecto incluye pruebas unitarias para los principales componentes, un total de 55 pruebas en 9 archivos:
+El proyecto incluye pruebas unitarias para los principales componentes, un total de 60 pruebas en 10 archivos:
 
 -   `Navbar.test.tsx` — pruebas para el componente Navbar.
 -   `NewsCard.test.tsx` — pruebas para el componente NewsCard.
@@ -59,7 +59,7 @@ El proyecto incluye pruebas unitarias para los principales componentes, un total
 -   `Favirites.test.tsx` — pruebas para la página Favorites.
 -   `FilterPage.test.tsx` — pruebas para la página FilterPage.
 -   `App.test.tsx` — pruebas de integración para la aplicación completa.
--   `newsApi.test.ts` — pruebas para los servicios de la API
+-   `newsApi.test.ts`, `news.test.ts` — pruebas para los servicios de la API
 -   `useDarkMode.test.tsx` — pruebas para el hook personalizado useDarkMode.
 -   `localStorage.test.ts` — pruebas para las utilidades de manejo de localStorage.
 
@@ -116,6 +116,7 @@ npm run test
 
 /api/
 ├── news.ts
+├── news.test.ts
 └── tsconfig.json
 
 /src/
