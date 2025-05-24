@@ -24,7 +24,7 @@ const NewsCard: React.FC<Props> = ({ article, onSave, isFavorite = false }) => {
             )}
             <h2 className='text-xl font-semibold'>{article.title}</h2>
             <p className='text-sm text-gray-600 dark:text-gray-300'>
-                {new Date(article.publishedAt).toLocaleDateString()}
+                {new Date(article.publishedAt).toLocaleDateString('es-ES')}
             </p>
             <p className='text-sm mt-2'>{article.description}</p>
             <div

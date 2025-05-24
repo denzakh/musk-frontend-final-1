@@ -19,7 +19,7 @@ exports[`NewsCard > snapshot 1`] = `
     <p
       class="text-sm text-gray-600 dark:text-gray-300"
     >
-      10.04.2025
+      10/4/2025
     </p>
     <p
       class="text-sm mt-2"

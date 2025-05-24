@@ -26,7 +26,7 @@ describe('NewsCard', () => {
 
         expect(
             screen.getByText(
-                new Date(mockArticle.publishedAt).toLocaleDateString()
+                new Date(mockArticle.publishedAt).toLocaleDateString('es-ES')
             )
         ).toBeInTheDocument();
 
